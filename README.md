@@ -7,53 +7,214 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Web_Ecommerce (Laravel + Tailwind)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🇺🇸 English
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP **8.2+**
+- Composer
+- Node.js **18+** and npm
+- Git
+- SQLite (default) or MySQL/PostgreSQL
 
-## Learning Laravel
+### Quick start (recommended)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```bash
+git clone <REPOSITORY_URL>
+cd Web_Ecommerce
+composer run setup
+composer run dev
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+`composer run setup` automatically runs:
 
-## Laravel Sponsors
+- `composer install`
+- `.env` creation (if missing)
+- `php artisan key:generate`
+- `php artisan migrate --force`
+- `npm install`
+- `npm run build`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Manual setup (step by step)
 
-### Premium Partners
+```bash
+git clone <REPOSITORY_URL>
+cd Web_Ecommerce
+composer install
+cp .env.example .env
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+#### Database
 
-## Contributing
+**Default (SQLite):**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
 
-## Code of Conduct
+**MySQL/PostgreSQL:**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Update DB variables in `.env` (`DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+2. Run:
 
-## Security Vulnerabilities
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Frontend (Tailwind + Vite)
 
-## License
+```bash
+npm install
+npm run build
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+For hot reload during development:
+
+```bash
+npm run dev
+```
+
+### Run the app
+
+Option A (full local dev: Laravel server + queue + logs + Vite):
+
+```bash
+composer run dev
+```
+
+Option B (separate terminals):
+
+```bash
+php artisan serve
+npm run dev
+```
+
+Default URL: `http://127.0.0.1:8000`
+
+### Useful commands
+
+```bash
+php artisan test
+./vendor/bin/pint
+php artisan optimize
+```
+
+### Common issues
+
+- **`Vite manifest not found`** → run `npm run build`.
+- **`No application encryption key has been specified`** → run `php artisan key:generate`.
+- **Database/session/cache table errors** → run `php artisan migrate`.
+
+---
+
+## 🇧🇷 Português
+
+### Requisitos
+
+- PHP **8.2+**
+- Composer
+- Node.js **18+** e npm
+- Git
+- SQLite (padrão) ou MySQL/PostgreSQL
+
+### Início rápido (recomendado)
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd Web_Ecommerce
+composer run setup
+composer run dev
+```
+
+O comando `composer run setup` executa automaticamente:
+
+- `composer install`
+- criação do `.env` (se não existir)
+- `php artisan key:generate`
+- `php artisan migrate --force`
+- `npm install`
+- `npm run build`
+
+### Configuração manual (passo a passo)
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd Web_Ecommerce
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
+#### Banco de dados
+
+**Padrão (SQLite):**
+
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+
+**MySQL/PostgreSQL:**
+
+1. Ajuste as variáveis de banco no `.env` (`DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+2. Execute:
+
+```bash
+php artisan migrate
+```
+
+#### Frontend (Tailwind + Vite)
+
+```bash
+npm install
+npm run build
+```
+
+Para desenvolvimento com hot reload:
+
+```bash
+npm run dev
+```
+
+### Rodar a aplicação
+
+Opção A (desenvolvimento completo: servidor Laravel + fila + logs + Vite):
+
+```bash
+composer run dev
+```
+
+Opção B (terminais separados):
+
+```bash
+php artisan serve
+npm run dev
+```
+
+URL padrão: `http://127.0.0.1:8000`
+
+### Comandos úteis
+
+```bash
+php artisan test
+./vendor/bin/pint
+php artisan optimize
+```
+
+### Problemas comuns
+
+- **`Vite manifest not found`** → execute `npm run build`.
+- **`No application encryption key has been specified`** → execute `php artisan key:generate`.
+- **Erros de tabela de banco/sessão/cache** → execute `php artisan migrate`.
+
+---
+
+## License / Licença
+
+This project is open-sourced under the [MIT license](https://opensource.org/licenses/MIT).
+
+Este projeto é open source sob a [licença MIT](https://opensource.org/licenses/MIT).
