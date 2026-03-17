@@ -63,10 +63,11 @@
                         <form action="{{ route('site.addcarrinho') }}" method="POST" enctype="multipart/form-data"
                             class="mt-10">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $produto->id }}">
-                            <input type="hidden" name="nome" value="{{ $produto->nome }}">
+                            <input type="hidden" name="id" value="{{ $produto->id }}"> <input type="hidden"
+                                name="slug" value="{{ $produto->slug }}"> <input type="hidden" name="nome"
+                                value="{{ $produto->nome }}">
                             <input type="hidden" name="preco" value="{{ $produto->preco }}">
-                            <input type="number" name="qnt" value="1">
+                            <input type="number" min="1" name="qnt" value="1">
                             <input type="hidden" name="imagem" value="{{ $produto->imagem }}">
                             <button type="submit"
                                 class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden">Adicionar

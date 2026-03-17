@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 </head>
 @vite(['resources/css/app.css', 'resources/js/app.js']) @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -43,7 +44,11 @@
                             <a href="{{ route('site.index') }}" aria-current="page"
                                 class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Home</a>
                             <a href="{{ route('site.carrinho') }}"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Carrinho</a>
+                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Carrinho
+                                <span
+                                    class="inline-flex items-center rounded-md bg-purple-400/10 px-2 py-1 text-xs font-medium text-purple-400 inset-ring inset-ring-purple-400/30">{{ \Cart::getContent()->count() }}</span>
+
+                            </a>
 
                             {{-- Inicio do dropdown de categorias --}}
 
@@ -90,7 +95,11 @@
                 <a href="#" aria-current="page"
                     class="block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white">Home</a>
                 <a href="{{ route('site.carrinho') }}"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Carrinho</a>
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Carrinho
+
+                    <span
+                        class="inline-flex items-center rounded-md bg-purple-400/10 px-2 py-1 text-xs font-medium text-purple-400 inset-ring inset-ring-purple-400/30">{{ \Cart::getContent()->count() }}</span>
+                </a>
 
 
                 {{-- Inicio do dropdown de categorias --}}
