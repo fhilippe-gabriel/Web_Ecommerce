@@ -33,10 +33,10 @@
                 <div>
                     <div class="flex items-center justify-between">
                         <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-                        <div class="text-sm">
+                        {{-- <div class="text-sm">
                             <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot
                                 password?</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="mt-2">
                         <input id="password" type="password" name="password" required autocomplete="current-password"
@@ -49,11 +49,16 @@
                         class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
                         in</button>
                 </div>
+                <input type="checkbox" name="remember" id="remember"
+                    class="h-4 w-4 rounded border-gray-300 text-gray-500 text-indigo-600 focus:ring-indigo-600"> Manter me
+                conectado
+                </input>
             </form>
 
             <p class="mt-10 text-center text-sm/6 text-gray-500">
-                Not a member?
-                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
+                Não tem uma conta
+                <a href="{{ route('login.create') }}" class="font-semibold text-indigo-600 hover:text-indigo-500">Crie uma
+                    conta</a>
             </p>
         </div>
     </div>

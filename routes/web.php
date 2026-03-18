@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\Authenticate;
 
+
+route::resource('users', UserController::class);
 
 // Rotas de acesso
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
@@ -25,5 +29,7 @@ Route::get('/limpar', [CarrinhoController::class, 'limparCarrinho'])->name('site
 Route::view('/login', 'login.form')->name('login.form');
 Route::post('/login', [LoginController::class, 'auth'])->name('login.auth');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [LoginController::class, 'create'])->name('login.create');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
