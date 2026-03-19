@@ -15,7 +15,7 @@ class ProdutoController extends Controller
         // return ('index');
 
         $produtos = Produto::paginate(8);
-        return view('site.home', compact('produtos'));
+        return view('site.home', 'admin.dashboard', compact('produtos'));
     }
 
     /**
