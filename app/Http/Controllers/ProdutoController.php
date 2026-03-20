@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Illuminate\Support\Str;
 
 class ProdutoController extends Controller
 {
@@ -15,7 +17,8 @@ class ProdutoController extends Controller
         // return ('index');
 
         $produtos = Produto::paginate(8);
-        return view('site.home', 'admin.dashboard', compact('produtos'));
+
+        return view('site.home', 'admin.dashboard', compact('produtos', 'categorias'));
     }
 
     /**
@@ -31,7 +34,20 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        return view('admin.produtos.create');
+        $categorias = Categoria::all();
+        return view('admin.produtos.create', compact('categorias'));
+
+        $produto = $request->all();
+
+        if ($request->imagem) {
+            $produto['imagem'] = $request->imagem->store('produtos');
+        }
+
+        $produto['slug'] = Str::slug($request->nome);
+
+        $produto = Produto::create($produto);
+
+        return redirect()->view('admin.dashboard');
     }
 
     /**
@@ -66,6 +82,6 @@ class ProdutoController extends Controller
         $produto = Produto::findOrFail($id);
         $produto->delete();
 
-        return redirect()->route('admin.produto')->with('success', 'Produto deletado com sucesso!');
+        return redirect()->route('admin.dashboard');
     }
 }

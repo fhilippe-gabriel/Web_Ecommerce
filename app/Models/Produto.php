@@ -15,7 +15,8 @@ class Produto extends Model
         'slug',
         'imagem',
         'user_id',
-        'categoria_id',
+        'id_categorias',
+        'id_user',
     ];
 
     public function user()
