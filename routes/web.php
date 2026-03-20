@@ -34,3 +34,5 @@ Route::get('/register', [LoginController::class, 'create'])->name('login.create'
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
 Route::get('/admin/produto', [ProdutoController::class, 'index'])->name('admin.produto')->middleware('auth');
+Route::get('/admin/novo', [ProdutoController::class, 'store'])->name('admin.novo')->middleware('auth');
+Route::delete('/admin/produto/delete/{id}', [ProdutoController::class, 'destroy'])->name('admin.delete')->middleware('auth');

@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::paginate(16);
         return view('admin.dashboard', ['produtos' => $produtos]);
     }
 }

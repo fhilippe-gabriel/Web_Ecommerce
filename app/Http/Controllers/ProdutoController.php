@@ -31,7 +31,7 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('admin.produtos.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class ProdutoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // 
     }
 
     /**
@@ -63,6 +63,9 @@ class ProdutoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $produto->delete();
+
+        return redirect()->route('admin.produto')->with('success', 'Produto deletado com sucesso!');
     }
 }
