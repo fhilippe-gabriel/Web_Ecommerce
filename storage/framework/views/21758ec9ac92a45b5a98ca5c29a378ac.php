@@ -17,7 +17,8 @@
                         <path
                             d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z" />
                     </svg>
-                    Total = {{ $produtos->total() }}
+                    Total = <?php echo e($produtos->total()); ?>
+
                 </div>
 
 
@@ -27,7 +28,7 @@
 
 
             <span class="sm:ml-3">
-                <a type="button" href="{{ route('admin.novo') }}"
+                <a type="button" href="<?php echo e(route('admin.novo')); ?>"
                     class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
                         class="mr-1.5 -ml-0.5 size-5">
@@ -46,14 +47,14 @@
 </div>
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <ul role="list" class="divide-y divide-gray-100">
-        @foreach ($produtos as $produto)
+        <?php $__currentLoopData = $produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <li class="flex justify-between py-4">
                 <div class="flex min-w-0 gap-x-4">
-                    <img src="{{ url('storage/' . $produto->imagem) }}" alt=""
+                    <img src="<?php echo e(url('storage/' . $produto->imagem)); ?>" alt=""
                         class="size-12 flex-none rounded-full bg-gray-50" />
                     <div class="min-w-0 flex-auto">
-                        <p class="text-sm/6 font-semibold text-gray-900">{{ $produto->nome }}</p>
-                        <p class="mt-1 truncate text-xs/5 text-gray-500">{{ $produto->descricao }}</p>
+                        <p class="text-sm/6 font-semibold text-gray-900"><?php echo e($produto->nome); ?></p>
+                        <p class="mt-1 truncate text-xs/5 text-gray-500"><?php echo e($produto->descricao); ?></p>
                     </div>
                 </div>
 
@@ -61,13 +62,15 @@
                     <div class="w-28 flex-shrink-0 flex items-center justify-center">
                         <span
                             class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 inset-ring inset-ring-indigo-700/10">
-                            {{ $produto->categoria->nome }}
+                            <?php echo e($produto->categoria->nome); ?>
+
                         </span>
                     </div>
 
                     <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end sm:justify-center">
                         <p class="text-sm/6 text-gray-900 text-right">
-                            R$ {{ number_format($produto->preco, 2, ',', '.') }}
+                            R$ <?php echo e(number_format($produto->preco, 2, ',', '.')); ?>
+
                         </p>
 
                         <div class="mt-2 flex items-center gap-x-2">
@@ -78,9 +81,9 @@
                                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
                             </button>
-                            <form action="{{ route('admin.delete', $produto->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
+                            <form action="<?php echo e(route('admin.delete', $produto->id)); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
                                 <button type="submit" class="text-red-400 hover:text-red-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -93,14 +96,16 @@
                     </div>
                 </div>
             </li>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
     </ul>
 
     <div class="mt-8 flex justify-center">
 
-        {{ $produtos->links('custom.pagination') }}
+        <?php echo e($produtos->links('custom.pagination')); ?>
+
     </div>
 
 
 </div>
+<?php /**PATH /Users/fhilippe.many/Documents/Web_Ecommerce/resources/views/admin/produtos.blade.php ENDPATH**/ ?>

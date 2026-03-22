@@ -1,13 +1,12 @@
-@extends('site.layout')
-@section('title', 'Novo Produto')
-@section('Conteudo')
+<?php $__env->startSection('title', 'Novo Produto'); ?>
+<?php $__env->startSection('Conteudo'); ?>
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10">
 
-        <form action="{{ route('admin.produto.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        <form action="<?php echo e(route('admin.produto.store')); ?>" method="POST" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
 
-            <input type="hidden" name="id_user" value="{{ auth()->user()->id }}">
+            <input type="hidden" name="id_user" value="<?php echo e(auth()->user()->id); ?>">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
                     <h2 class="text-base/7 font-semibold text-gray-900">Novo Produto</h2>
@@ -73,12 +72,13 @@
                         <div class="mt-2 grid grid-cols-1">
                             <select id="id_categorias" name="id_categorias" autocomplete="id_categorias"
                                 class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                @foreach ($categorias as $categoria)
-                                    <option value="{{ $categoria->id }}"
-                                        {{ old('categoria') == $categoria->nome ? 'selected' : '' }}>
-                                        {{ $categoria->nome }}
+                                <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categoria): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($categoria->id); ?>"
+                                        <?php echo e(old('categoria') == $categoria->nome ? 'selected' : ''); ?>>
+                                        <?php echo e($categoria->nome); ?>
+
                                     </option>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </select>
                             <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true"
@@ -105,7 +105,7 @@
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
-                <a type="button" href="{{ route('admin.dashboard') }}"
+                <a type="button" href="<?php echo e(route('admin.dashboard')); ?>"
                     class="text-sm/6 font-semibold text-gray-900">Cancelar</a>
                 <button type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Salvar</button>
@@ -113,4 +113,6 @@
         </form>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('site.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /Users/fhilippe.many/Documents/Web_Ecommerce/resources/views/admin/produtos/create.blade.php ENDPATH**/ ?>

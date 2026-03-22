@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
-use Illuminate\Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 class ProdutoController extends Controller
 {
@@ -26,7 +26,9 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+
+        $categorias = Categoria::all();
+        return view('admin.produtos.create', compact('categorias'));
     }
 
     /**
@@ -34,20 +36,18 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        $categorias = Categoria::all();
-        return view('admin.produtos.create', compact('categorias'));
 
         $produto = $request->all();
 
         if ($request->imagem) {
-            $produto['imagem'] = $request->imagem->store('produtos');
+            $produto['imagem'] = $request->imagem->store('produtos', 'public');
         }
 
         $produto['slug'] = Str::slug($request->nome);
 
         $produto = Produto::create($produto);
 
-        return redirect()->view('admin.dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     /**
